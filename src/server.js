@@ -13,10 +13,10 @@ server.use(bodyParser.json());
 
 // TODO: your code to handle requests
 server.get('/posts', (req, res) => {
-  const term = req.query;
-  const results = posts.filter(post => post.title === term || post.contents === term);
+  const term = req.query.term;
+  const results = posts.filter(post => post.title.includes(term) || post.contents.includes(term));
   if (results.length !== 0) {
-    return res.status(200).json(results);
+    res.status(200).json(results);
   }
   res.status(200).json(posts);
 });
